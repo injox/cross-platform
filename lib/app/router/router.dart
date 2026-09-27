@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:talker_flutter/talker_flutter.dart';
-import 'package:flutter_labs/di/di.dart';
 
 import 'package:flutter_labs/app/features/home/home_screen.dart';
-
+import 'package:flutter_labs/app/features/home/product_details_screen.dart';
+import 'package:flutter_labs/app/features/home/product.dart';
+import 'package:flutter_labs/di/di.dart';
 
 final _rootNavigationKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 
@@ -21,13 +22,19 @@ final router = GoRouter(
         child: const HomeScreen(),
       ),
     ),
-    // для следующей лабораторной работы
-    // GoRoute(
-    //   path: '/content/:id',
-    //   pageBuilder: (_, state) => MaterialPage(
-    //     key: state.pageKey,
-    //     child: ContentScreen(contentId: state.pathParameters['id']!),
-    //   ),
-    // ),
+
+    GoRoute(
+      path: '/product',
+      pageBuilder: (_, state) {
+        final product = state.extra as Product;
+
+        return MaterialPage(
+          key: state.pageKey,
+          child: ProductDetailsScreen(
+            product: product,
+          ),
+        );
+      },
+    ),
   ],
 );

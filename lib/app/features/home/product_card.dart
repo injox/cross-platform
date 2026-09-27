@@ -5,6 +5,7 @@ class ProductCard extends StatelessWidget {
   final String description;
   final double price;
   final String image;
+  final VoidCallback? onTap;
 
   const ProductCard({
     super.key,
@@ -12,6 +13,7 @@ class ProductCard extends StatelessWidget {
     required this.description,
     required this.price,
     required this.image,
+    this.onTap,
   });
 
   @override
@@ -25,7 +27,7 @@ class ProductCard extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
-          onTap: () {},
+          onTap: onTap,
           child: SizedBox(
             height: imageSize,
             child: Row(
@@ -40,9 +42,7 @@ class ProductCard extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-
                 const SizedBox(width: 16),
-
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,9 +53,7 @@ class ProductCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-
                       const SizedBox(height: 4),
-
                       Expanded(
                         child: Text(
                           description,
@@ -64,7 +62,6 @@ class ProductCard extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
-
                       Text(
                         '${price.toStringAsFixed(0)} ₽',
                         style: Theme.of(context)
